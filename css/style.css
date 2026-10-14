@@ -39,3 +39,5 @@ body.motion-off .stage.drawing .hatBtn,body.motion-off .stage.drawing .paper,bod
 .tmdb-guide li{margin-bottom:9px}
 .tmdb-guide a{color:#f3d494;text-underline-offset:3px}
 .tmdb-guide .note{line-height:1.6}
+
+.refresh-wrap{text-align:center;margin:7px 0 2px}.refresh-wrap .secondary{min-height:42px;padding:9px 16px;width:auto;max-width:100%}
