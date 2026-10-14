@@ -1,0 +1,101 @@
+[
+  {
+    "id": "grand-budapest-hotel",
+    "titre": "The Grand Budapest Hotel",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Comédie",
+      "Aventure"
+    ],
+    "ambiance": [
+      "Léger",
+      "Décalé"
+    ],
+    "duree": [
+      "Court"
+    ],
+    "annee": 2014,
+    "resume": "Une aventure fantasque dans un hôtel européen légendaire."
+  },
+  {
+    "id": "dark",
+    "titre": "Dark",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Sombre",
+      "Mystérieux"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2017,
+    "resume": "Une disparition révèle les secrets de plusieurs générations."
+  },
+  {
+    "id": "interstellar",
+    "titre": "Interstellar",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Aventure"
+    ],
+    "ambiance": [
+      "Épique",
+      "Émouvant"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2014,
+    "resume": "Un voyage spatial à la recherche d’un avenir pour l’humanité."
+  },
+  {
+    "id": "brooklyn-nine-nine",
+    "titre": "Brooklyn Nine-Nine",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Comédie",
+      "Policier"
+    ],
+    "ambiance": [
+      "Léger"
+    ],
+    "duree": [
+      "Court"
+    ],
+    "annee": 2013,
+    "resume": "Le quotidien décalé d’une brigade de police new-yorkaise."
+  },
+  {
+    "id": "knives-out",
+    "titre": "Knives Out",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Comédie",
+      "Policier"
+    ],
+    "ambiance": [
+      "Mystérieux",
+      "Décalé"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2019,
+    "resume": "Une enquête pleine de rebondissements dans une famille extravagante."
+  }
+]
