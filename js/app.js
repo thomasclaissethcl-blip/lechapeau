@@ -8,7 +8,7 @@ const EXPLORE={type:['Film','Série'],mood:Object.keys(MOODS),genre:['Action','A
 let collection=[],saved=[],mode='personal',chosen={personal:{},explore:{}},bags={personal:new Bag(),explore:new Bag()},external=[],current=null,busy=false,drawSeq=0,confettiTimeout=0;
 const seenExplore=new Set(JSON.parse(localStorage.getItem('chapeau_explore_seen_v1')||'[]'));
 let token=sessionStorage.getItem('chapeau_tmdb_token')||'';
-let motionEnabled=localStorage.getItem('chapeau_motion')==='0'?false:localStorage.getItem('chapeau_motion')==='1'?true:!matchMedia('(prefers-reduced-motion: reduce)').matches;
+let motionEnabled=localStorage.getItem('chapeau_motion')!=='0'; // Animations activées par défaut ; une désactivation explicite reste mémorisée.
 function writeStatus(message,error=false){$('status').textContent=message;$('status').classList.toggle('error',error)}
 function showDrawError(message){const result=$('result');$('hat').classList.add('hide');result.classList.remove('hide');result.innerHTML=`<span class="resultLabel">Le tirage n’a pas abouti</span><h2>Impossible de proposer un titre</h2><p>${htmlEscape(message)}</p><button class="mainbutton" id="retryDraw">Réessayer le tirage</button><button class="secondary" id="openTmdbSettings">Vérifier le jeton TMDB</button>`;$('retryDraw').onclick=draw;$('openTmdbSettings').onclick=openSettings}
 function normalize(o){const x={...o};x.id=String(o.id||`${o.titre||o.title}-${o.annee||o.year||''}`).trim();x.title=String(o.titre||o.title||'Sans titre');x.summary=String(o.resume||o.summary||'');x.year=o.annee||o.year||null;x.type=Array.isArray(o.type)?o.type:[o.type||'Film'];return x}
