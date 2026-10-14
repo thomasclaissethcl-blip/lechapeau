@@ -41,3 +41,5 @@ body.motion-off .stage.drawing .hatBtn,body.motion-off .stage.drawing .paper,bod
 .tmdb-guide .note{line-height:1.6}
 
 .refresh-wrap{text-align:center;margin:7px 0 2px}.refresh-wrap .secondary{min-height:42px;padding:9px 16px;width:auto;max-width:100%}
+
+.remember-token{display:flex;align-items:center;gap:.6rem;color:#f6e7cb;font-size:.92rem;line-height:1.45;cursor:pointer}.remember-token input{width:1.15rem;height:1.15rem;accent-color:#e8c583;flex:none}
