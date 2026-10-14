@@ -31,3 +31,11 @@ body.motion-off .stage.drawing .hatBtn,body.motion-off .stage.drawing .paper,bod
 
 /* V1 : ajustements */
 [hidden]{display:none!important}.hatBtn:disabled{cursor:wait}.filter-select,.token-input{width:100%;background:#111a30;color:#f8eacc;border:1px solid #69758e;border-radius:10px;padding:11px}.setting-row{display:grid;gap:8px;margin:15px 0}.setting-row label{font-weight:650;font-size:13px}.result .poster{width:86px;border-radius:8px;float:right;margin:0 0 8px 12px}.sheet button:focus-visible{outline:3px solid #edcc8e}.error{color:#ffd5c6}.saved-note{margin:10px 0;font-size:12px}.footer a{color:#f5d695}.status-note{text-align:center;font-size:12px;color:#d9bda0;min-height:1.2em}.action-row{display:flex;gap:8px;flex-wrap:wrap}.action-row button{flex:1}.stage.drawing .hatBtn{will-change:transform}@media(prefers-reduced-motion:reduce){body:not(.motion-force) .stage.drawing .hatBtn,body:not(.motion-force) .stage.drawing .paper,body:not(.motion-force) .stage.drawing .ticket-flight{animation:none!important}}
+
+/* Aide à la configuration de TMDB */
+.tmdb-guide{background:#242c47;border:1px solid #58617c;border-radius:12px;padding:14px;color:#f5ead5}
+.tmdb-guide summary{cursor:pointer;font-weight:650;line-height:1.5}
+.tmdb-guide ol{padding-left:22px;line-height:1.65;margin:14px 0}
+.tmdb-guide li{margin-bottom:9px}
+.tmdb-guide a{color:#f3d494;text-underline-offset:3px}
+.tmdb-guide .note{line-height:1.6}
