@@ -25,4 +25,76 @@ async function get(path,token,params={}){
   }finally{clearTimeout(timeout)}
 }
 
-export async function explore(token,filters,excludeIds=new Set()){if(!token)throw new Error('Ajoutez un jeton TMDB dans les paramètres pour explorer.');const kinds=filters.type?.length?filters.type:['Film','Série'];const choices=shuffle(kinds);let candidates=[];for(const kind of choices){const media=kind==='Film'?'movie':'tv';const dict=GENRES[kind];const specified=(filters.genre||[]).filter(x=>dict[x]);const moodGenres=(filters.mood||[]).flatMap(m=>MOODS[m]||[]);const params={language:'fr-FR',include_adult:false,sort_by:'popularity.desc'};const groups=[specified,moodGenres].filter(x=>x.length).map(group=>[...new Set(group.map(x=>dict[x]).filter(Boolean))].join('|'));if(groups.length)params.with_genres=groups.join(',');if(filters.period?.length===1){const p=filters.period[0];const start=p==='Avant 2000'?null:p==='2000-2019'?'2000-01-01':'2020-01-01';const end=p==='Avant 2000'?'1999-12-31':p==='2000-2019'?'2019-12-31':null;if(start)params[media==='movie'?'primary_release_date.gte':'first_air_date.gte']=start;if(end)params[media==='movie'?'primary_release_date.lte':'first_air_date.lte']=end}if(filters.rating?.includes('Bien noté')){params['vote_average.gte']=7;params['vote_count.gte']=100}if(filters.length?.length===1 && media==='movie'){const ranges={'Court':[0,90],'Moyen':[90,120],'Long':[120,1000]};const [a,b]=ranges[filters.length[0]]||[];if(a!==undefined){params['with_runtime.gte']=a;params['with_runtime.lte']=b}}const first=await get(`/discover/${media}`,token,{...params,page:1});const total=Math.min(Math.max(1,first.total_pages||1),500);const pages=[1];for(let i=0;i<Math.min(5,total-1);i++){const p=1+randomInt(total);if(!pages.includes(p))pages.push(p)}const sets=await Promise.all(pages.map(p=>p===1?Promise.resolve(first):get(`/discover/${media}`,token,{...params,page:p})));candidates.push(...sets.flatMap(data=>(data.results||[]).map(item=>({id:`tmdb-${media}-${item.id}`,tmdbId:item.id,title:item.title||item.name,type:kind,genre:(item.genre_ids||[]).map(n=>Object.keys(dict).find(k=>dict[k]===n)).filter(Boolean),year:Number((item.release_date||item.first_air_date||'').slice(0,4))||null,summary:item.overview||'Aucun résumé disponible.',poster:item.poster_path?`https://image.tmdb.org/t/p/w342${item.poster_path}`:null,url:`https://www.themoviedb.org/${media}/${item.id}`}))));candidates=candidates.filter(x=>x.title&&!excludeIds.has(x.id));if(candidates.length)break}if(!candidates.length)throw new Error('Aucune nouvelle proposition trouvée. Modifiez les filtres ou réinitialisez l’historique.');return shuffle(candidates)}
+// Construit les paramètres séparément pour chaque type de média.
+function discoverParams(kind,filters){
+  const media=kind==='Film'?'movie':'tv';
+  const dict=GENRES[kind];
+  const specified=(filters.genre||[]).filter(x=>dict[x]);
+  const moodGenres=(filters.mood||[]).flatMap(m=>MOODS[m]||[]);
+  const params={language:'fr-FR',include_adult:false,sort_by:'popularity.desc'};
+  const groups=[specified,moodGenres].filter(x=>x.length).map(group=>[...new Set(group.map(x=>dict[x]).filter(Boolean))].join('|'));
+  if(groups.length)params.with_genres=groups.join(',');
+  if(filters.period?.length===1){
+    const period=filters.period[0];
+    const start=period==='2000-2019'?'2000-01-01':period==='Depuis 2020'?'2020-01-01':null;
+    const end=period==='Avant 2000'?'1999-12-31':period==='2000-2019'?'2019-12-31':null;
+    if(start)params[media==='movie'?'primary_release_date.gte':'first_air_date.gte']=start;
+    if(end)params[media==='movie'?'primary_release_date.lte':'first_air_date.lte']=end;
+  }
+  if(filters.rating?.includes('Bien noté')){
+    params['vote_average.gte']=7;
+    params['vote_count.gte']=100;
+  }
+  if(filters.length?.length===1&&media==='movie'){
+    const ranges={Court:[0,90],Moyen:[90,120],Long:[120,1000]};
+    const bounds=ranges[filters.length[0]];
+    if(bounds){params['with_runtime.gte']=bounds[0];params['with_runtime.lte']=bounds[1]}
+  }
+  return {media,dict,params};
+}
+
+// Tirage uniforme des indices de pages, sans inclure artificiellement la page 1.
+function randomPages(total,n){
+  const pages=new Set();
+  while(pages.size<Math.min(total,n))pages.add(1+randomInt(total));
+  return [...pages];
+}
+
+async function fetchKind(kind,token,filters,excludeIds,limit){
+  const {media,dict,params}=discoverParams(kind,filters);
+  // La première requête fournit le nombre de pages accessibles (TMDB: 500 max).
+  const first=await get(`/discover/${media}`,token,{...params,page:1});
+  const total=Math.min(Math.max(0,first.total_pages||0),500);
+  if(!total)return [];
+  const pages=randomPages(total,Math.ceil(limit/20)+2);
+  const datasets=await Promise.all(pages.map(page=>page===1?first:get(`/discover/${media}`,token,{...params,page})));
+  const items=datasets.flatMap(data=>data.results||[]).map(item=>({
+    id:`tmdb-${media}-${item.id}`,tmdbId:item.id,title:item.title||item.name,
+    type:kind,genre:(item.genre_ids||[]).map(n=>Object.keys(dict).find(k=>dict[k]===n)).filter(Boolean),
+    year:Number((item.release_date||item.first_air_date||'').slice(0,4))||null,
+    summary:item.overview||'Aucun résumé disponible.',
+    poster:item.poster_path?`https://image.tmdb.org/t/p/w342${item.poster_path}`:null,
+    url:`https://www.themoviedb.org/${media}/${item.id}`
+  }));
+  const unique=[...new Map(items.filter(item=>item.title&&!excludeIds.has(item.id)).map(item=>[item.id,item])).values()];
+  return shuffle(unique).slice(0,limit);
+}
+
+export async function explore(token,filters,excludeIds=new Set()){
+  if(!token)throw new Error('Ajoutez un jeton TMDB dans les paramètres pour explorer.');
+  const kinds=(filters.type?.length?filters.type:['Film','Série']).filter(kind=>kind==='Film'||kind==='Série');
+  if(!kinds.length)throw new Error('Sélectionnez Film ou Série dans les filtres.');
+  const target=120;
+  const each=Math.floor(target/kinds.length);
+  // Chaque type est interrogé indépendamment pour éviter qu'il monopolise la réserve.
+  const outcomes=await Promise.allSettled(kinds.map(kind=>fetchKind(kind,token,filters,excludeIds,each)));
+  const successes=outcomes.filter(o=>o.status==='fulfilled').map(o=>o.value);
+  if(!successes.length)throw outcomes[0].reason;
+  const combined=successes.flat();
+  if(!combined.length){
+    if(outcomes.some(o=>o.status==='rejected'))throw outcomes.find(o=>o.status==='rejected').reason;
+    throw new Error('Aucun nouveau titre trouvé avec ces filtres. Essayez d’autres critères ou réinitialisez l’historique.');
+  }
+  // Si un catalogue est petit, les autres titres disponibles restent éligibles.
+  return shuffle(combined);
+}
