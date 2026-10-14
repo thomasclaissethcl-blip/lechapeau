@@ -33,8 +33,8 @@ function discoverParams(kind,filters){
   const specified=(filters.genre||[]).filter(x=>dict[x]);
   const moodGenres=(filters.mood||[]).flatMap(m=>MOODS[m]||[]);
   const params={language:'fr-FR',include_adult:false,sort_by:'popularity.desc'};
-  const country=(filters.country||[])[0];
-  if(country&&country!=='Monde'&&COUNTRIES[country])params.with_origin_country=COUNTRIES[country];
+  const countryCodes=[...new Set((filters.country||[]).filter(c=>c!=='Monde').map(c=>COUNTRIES[c]).filter(Boolean))];
+  if(countryCodes.length)params.with_origin_country=countryCodes.join('|');
   // Ne jamais tirer de séries d'animation ni d'émissions TV. Les films d'animation restent autorisés.
   if(media==='tv'){
     params.with_type='2|4'; // Mini-séries et séries scénarisées (TMDB)
@@ -70,6 +70,7 @@ function randomPages(total,n){
 
 async function fetchKind(kind,token,filters,excludeIds,limit){
   const {media,dict,params}=discoverParams(kind,filters);
+  const countryCodes=(filters.country||[]).filter(c=>c!=='Monde').map(c=>COUNTRIES[c]).filter(Boolean);
   // La première requête fournit le nombre de pages accessibles (TMDB: 500 max).
   const first=await get(`/discover/${media}`,token,{...params,page:1});
   const total=Math.min(Math.max(0,first.total_pages||0),500);
@@ -91,7 +92,7 @@ async function fetchKind(kind,token,filters,excludeIds,limit){
     if(!item.title||excludeIds.has(item.id))return false;
     const raw=rawById.get(item.tmdbId);
     if(media==='tv'&&raw?.genre_ids?.some(id=>disallowedTvGenres.has(id)))return false;
-    if(country&&country!=='Monde'&&COUNTRIES[country]&&media==='tv'&&raw?.origin_country?.length&&!raw.origin_country.includes(COUNTRIES[country]))return false;
+    if(countryCodes.length&&media==='tv'&&raw?.origin_country?.length&&!raw.origin_country.some(code=>countryCodes.includes(code)))return false;
     return true;
   }).map(item=>[item.id,item])).values()];
   return shuffle(unique).slice(0,limit);
