@@ -1,6 +1,7 @@
 import {randomInt,shuffle} from './random.js';
 const BASE='https://api.themoviedb.org/3';
 export const GENRES={Film:{Action:28,Aventure:12,Animation:16,Comédie:35,Policier:80,Documentaire:99,Drame:18,Fantastique:14,Horreur:27,Romance:10749,'Science-fiction':878,Thriller:53},Série:{Action:10759,Aventure:10759,Animation:16,Comédie:35,Policier:80,Documentaire:99,Drame:18,Fantastique:10765,Horreur:9648,Romance:10749,'Science-fiction':10765,Thriller:9648}};
+export const COUNTRIES={'France':'FR','États-Unis':'US','Royaume-Uni':'GB','Japon':'JP','Corée du Sud':'KR','Inde':'IN','Allemagne':'DE','Italie':'IT','Espagne':'ES','Canada':'CA','Australie':'AU','Belgique':'BE'};
 export const MOODS={Léger:['Comédie','Animation','Romance'],Suspense:['Thriller','Policier','Horreur'],Réflexion:['Science-fiction','Drame','Documentaire'],Aventure:['Aventure','Action','Fantastique'],Émouvant:['Drame','Romance','Animation']};
 async function get(path,token,params={}){
   const url=new URL(BASE+path);
@@ -32,6 +33,13 @@ function discoverParams(kind,filters){
   const specified=(filters.genre||[]).filter(x=>dict[x]);
   const moodGenres=(filters.mood||[]).flatMap(m=>MOODS[m]||[]);
   const params={language:'fr-FR',include_adult:false,sort_by:'popularity.desc'};
+  const country=(filters.country||[])[0];
+  if(country&&country!=='Monde'&&COUNTRIES[country])params.with_origin_country=COUNTRIES[country];
+  // Ne jamais tirer de séries d'animation ni d'émissions TV. Les films d'animation restent autorisés.
+  if(media==='tv'){
+    params.with_type='2|4'; // Mini-séries et séries scénarisées (TMDB)
+    params.without_genres='16,99,10763,10764,10766,10767';
+  }
   const groups=[specified,moodGenres].filter(x=>x.length).map(group=>[...new Set(group.map(x=>dict[x]).filter(Boolean))].join('|'));
   if(groups.length)params.with_genres=groups.join(',');
   if(filters.period?.length===1){
@@ -76,7 +84,16 @@ async function fetchKind(kind,token,filters,excludeIds,limit){
     poster:item.poster_path?`https://image.tmdb.org/t/p/w342${item.poster_path}`:null,
     url:`https://www.themoviedb.org/${media}/${item.id}`
   }));
-  const unique=[...new Map(items.filter(item=>item.title&&!excludeIds.has(item.id)).map(item=>[item.id,item])).values()];
+  // Défense supplémentaire contre les métadonnées de type de programme imparfaites.
+  const disallowedTvGenres=new Set([16,99,10763,10764,10766,10767]);
+  const rawById=new Map(datasets.flatMap(data=>data.results||[]).map(item=>[item.id,item]));
+  const unique=[...new Map(items.filter(item=>{
+    if(!item.title||excludeIds.has(item.id))return false;
+    const raw=rawById.get(item.tmdbId);
+    if(media==='tv'&&raw?.genre_ids?.some(id=>disallowedTvGenres.has(id)))return false;
+    if(country&&country!=='Monde'&&COUNTRIES[country]&&media==='tv'&&raw?.origin_country?.length&&!raw.origin_country.includes(COUNTRIES[country]))return false;
+    return true;
+  }).map(item=>[item.id,item])).values()];
   return shuffle(unique).slice(0,limit);
 }
 
