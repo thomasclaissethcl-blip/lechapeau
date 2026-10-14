@@ -42,7 +42,7 @@ TMDB propose l'utilisation gratuite de son API à des fins non commerciales, sou
 
 ## Exploration TMDB
 
-Le mode « Hors du chapeau » utilise l'API officielle TMDB et nécessite un **API Read Access Token**. Renseigner ce jeton dans **Paramètres** ; il est stocké seulement pour l'onglet en cours via `sessionStorage`. Ne jamais inscrire de secret API dans GitHub, un fichier JS ou le JSON. Une app statique ne peut pas empêcher le propriétaire du navigateur de voir le jeton qu'il y saisit ; pour une application publique multi-utilisateur, il faudra un proxy côté serveur.
+Le mode « Hors du chapeau » utilise l'API officielle TMDB et nécessite un **API Read Access Token**. Renseigner ce jeton dans **Paramètres** ; il est mémorisé par défaut dans `localStorage`, ou temporairement dans `sessionStorage` si vous désactivez la case « Mémoriser mon jeton sur cet appareil ». Ne jamais inscrire de secret API dans GitHub, un fichier JS ou le JSON. Une app statique ne peut pas empêcher le propriétaire du navigateur de voir le jeton qu'il y saisit ; pour une application publique multi-utilisateur, il faudra un proxy côté serveur.
 
 Les filtres de genre et d'époque sont transmis aux endpoints `discover/movie` et `discover/tv`. Les « ambiances » sont des correspondances éditoriales imparfaites avec des genres. La durée s'applique uniquement aux films. Le tirage est sans remise à l'intérieur d'un lot de résultats récupéré sur plusieurs pages aléatoires, et **n'est pas un échantillon uniformément représentatif de l'ensemble du catalogue TMDB**. Les limites et variations de pagination de l'API s'appliquent.
 
@@ -65,3 +65,23 @@ Le champ facultatif `collection` accepte un tableau de chaînes, par exemple `"c
 ## Diagnostic du mode Hors du chapeau
 
 Cette version affiche explicitement les erreurs TMDB dans une carte de résultat, avec les actions « Réessayer le tirage » et « Vérifier le jeton TMDB ». Le jeton attendu est le **API Read Access Token** (jeton Bearer), pas la clé API v3. En cas de problème réseau, une requête expire au bout de 12 secondes. Les données externes nécessitent un accès réseau et un jeton valide.
+
+### Animations
+
+Les animations de tirage sont activées par défaut, y compris lors de la première visite. Le réglage « Animations activées » permet de les désactiver ou de les réactiver ; le choix est mémorisé dans le navigateur.
+
+## Réserve TMDB équilibrée et renouvellement
+
+Lorsque Film et Série sont autorisés, le mode Hors du chapeau interroge les deux catalogues indépendamment et vise une réserve d'environ 60 films et 60 séries. Si l'un des deux catalogues contient trop peu de titres correspondant aux filtres, la réserve peut être plus petite et déséquilibrée. Chaque sous-ensemble est obtenu depuis des pages sélectionnées aléatoirement, dans la limite de pagination de TMDB. Le hasard est uniforme dans la réserve construite, **pas dans la totalité du catalogue TMDB**.
+
+Le bouton **Renouveler les découvertes** (visible uniquement en exploration) écarte la réserve courante, charge de nouvelles pages et déclenche un tirage animé avec les filtres inchangés. Les titres déjà tirés, conservés dans l'historique local, sont exclus des nouvelles recherches. Un message apparaît si aucun nouveau titre ne peut être trouvé. La sélection de nouveaux titres dépend de la couverture de l'API et des limites d'accès. L'application effectue plusieurs requêtes TMDB lors du renouvellement.
+
+### Mémorisation du jeton
+
+Dans **Paramètres > Exploration TMDB**, la case **Mémoriser mon jeton sur cet appareil** est cochée par défaut. Enregistrer avec la case cochée place le jeton dans `localStorage` et le conserve entre les visites sur le même navigateur. Décochez-la et enregistrez pour conserver le jeton dans `sessionStorage` seulement ; l’ancienne copie persistante est alors supprimée. Videz le champ du jeton, puis enregistrez pour le retirer des deux stockages. Les données du navigateur peuvent aussi être effacées manuellement. Évitez la mémorisation sur les appareils partagés.
+
+## Exploration : pays et programmes admissibles
+
+Le filtre « Pays d’origine » accepte un pays à la fois. « Monde » (sélectionné par défaut) ne restreint pas la provenance. Il utilise `with_origin_country` sur les recherches TMDB, et ne doit pas être confondu avec la langue originale ni le pays où un film est disponible. Les coproductions peuvent apparaître pour plusieurs pays.
+
+Les films d’animation restent autorisés, y compris les productions japonaises et les films Ghibli. Les **séries d’animation** sont exclues du tirage d’exploration, quelle que soit leur provenance. Les séries sont limitées aux catégories TMDB « mini-série » et « scripted » (`with_type=2|4`), avec exclusion supplémentaire des genres animation, documentaire, news, reality, soap et talk-show. Le filtrage dépend de la qualité du référencement TMDB : des contenus mal catégorisés peuvent subsister, et certaines fictions atypiques peuvent être exclues. Le mode « Dans le chapeau » ne subit aucune de ces exclusions.
