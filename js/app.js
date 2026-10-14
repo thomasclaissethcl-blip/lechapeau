@@ -10,6 +10,7 @@ const seenExplore=new Set(JSON.parse(localStorage.getItem('chapeau_explore_seen_
 let token=sessionStorage.getItem('chapeau_tmdb_token')||'';
 let motionEnabled=localStorage.getItem('chapeau_motion')==='0'?false:localStorage.getItem('chapeau_motion')==='1'?true:!matchMedia('(prefers-reduced-motion: reduce)').matches;
 function writeStatus(message,error=false){$('status').textContent=message;$('status').classList.toggle('error',error)}
+function showDrawError(message){const result=$('result');$('hat').classList.add('hide');result.classList.remove('hide');result.innerHTML=`<span class="resultLabel">Le tirage n’a pas abouti</span><h2>Impossible de proposer un titre</h2><p>${htmlEscape(message)}</p><button class="mainbutton" id="retryDraw">Réessayer le tirage</button><button class="secondary" id="openTmdbSettings">Vérifier le jeton TMDB</button>`;$('retryDraw').onclick=draw;$('openTmdbSettings').onclick=openSettings}
 function normalize(o){const x={...o};x.id=String(o.id||`${o.titre||o.title}-${o.annee||o.year||''}`).trim();x.title=String(o.titre||o.title||'Sans titre');x.summary=String(o.resume||o.summary||'');x.year=o.annee||o.year||null;x.type=Array.isArray(o.type)?o.type:[o.type||'Film'];return x}
 function allPersonal(){return [...new Map([...collection,...saved].map(x=>[x.id,x])).values()]}
 function values(x){return Array.isArray(x)?x:x==null?[]:[x]}
@@ -26,7 +27,52 @@ function openSheet(){renderFilters();$('overlay').classList.add('open')}
 function closeSheet(){$('overlay').classList.remove('open');render()}
 function confetti(){const layer=$('confettiLayer');layer.replaceChildren();if(!motionEnabled)return;const colors=['#edcc8e','#f7e7c4','#db8f82','#94afdb','#b8a2df','#9dcab3'];const fragment=document.createDocumentFragment();for(let i=0;i<115;i++){const element=document.createElement('i');element.className='confetti';const r=()=>Math.random();for(const [k,v] of Object.entries({'--x':(r()*100).toFixed(2)+'%','--w':(5+r()*6).toFixed(1)+'px','--h':(8+r()*9).toFixed(1)+'px','--color':colors[Math.floor(r()*colors.length)],'--delay':(r()*.48).toFixed(2)+'s','--dur':(2.25+r()*1.25).toFixed(2)+'s','--drift':(-170+r()*340).toFixed(0)+'px','--spin':(-900+r()*1800).toFixed(0)+'deg'}))element.style.setProperty(k,v);fragment.appendChild(element)}layer.appendChild(fragment);clearTimeout(confettiTimeout);confettiTimeout=setTimeout(()=>layer.replaceChildren(),4600)}
 function pause(ms){return new Promise(resolve=>setTimeout(resolve,ms))}
-async function draw(){if(busy)return;if(mode==='personal'&&!pool().length)return;const active=mode,sequence=++drawSeq;busy=true;current=null;writeStatus('');$('confettiLayer').replaceChildren();clearTimeout(confettiTimeout);render();const stage=$('stage');stage.classList.remove('drawing');void stage.offsetWidth;stage.classList.add('drawing');let next=null,err=null;const start=performance.now();try{if(active==='personal'){next=bags.personal.next(pool(),signature())}else{if(!token)throw new Error('Configurez le jeton TMDB dans les paramètres pour explorer.');if(!external.length||!bags.explore.count(external,signature())){external=await explore(token,chosen.explore,new Set([...seenExplore,...allPersonal().map(x=>x.id)]));bags.explore.clear()}next=bags.explore.next(external,signature());if(next){seenExplore.add(next.id);localStorage.setItem('chapeau_explore_seen_v1',JSON.stringify([...seenExplore].slice(-1000)))}}}catch(e){err=e.message||'Erreur inconnue'}const wait=motionEnabled?3380:250;await pause(Math.max(0,wait-(performance.now()-start)));if(sequence!==drawSeq)return;busy=false;stage.classList.remove('drawing');current=next;render();if(err)writeStatus(err,true);else if(next)confetti()}
+async function draw(){
+  if(busy)return;
+  if(mode==='personal'&&!pool().length)return;
+  const active=mode,sequence=++drawSeq;
+  busy=true;current=null;
+  writeStatus('');$('confettiLayer').replaceChildren();clearTimeout(confettiTimeout);
+  render();
+  const stage=$('stage');stage.classList.remove('drawing');void stage.offsetWidth;stage.classList.add('drawing');
+  const start=performance.now();
+  const minDuration=motionEnabled?3380:250;
+  // The animation and network request run concurrently, but the user always
+  // receives a visible result or an actionable error when both have finished.
+  const animation=pause(minDuration);
+  let next=null,err=null;
+  try{
+    if(active==='personal'){
+      next=bags.personal.next(pool(),signature());
+    }else{
+      if(!token)throw new Error('Aucun jeton TMDB configuré. Ouvrez les paramètres pour renseigner un API Read Access Token.');
+      if(!external.length||!bags.explore.count(external,signature())){
+        writeStatus('Recherche de films et séries dans TMDB…');
+        external=await explore(token,chosen.explore,new Set([...seenExplore,...allPersonal().map(x=>x.id)]));
+        bags.explore.clear();
+      }
+      next=bags.explore.next(external,signature());
+      if(next){seenExplore.add(next.id);try{localStorage.setItem('chapeau_explore_seen_v1',JSON.stringify([...seenExplore].slice(-1000)))}catch(e){console.warn('Historique TMDB non sauvegardé',e)}}
+    }
+  }catch(e){
+    console.error('Échec du tirage',e);
+    err=e instanceof Error?e.message:String(e);
+  }
+  const elapsed=performance.now()-start;
+  if(elapsed<minDuration)await pause(minDuration-elapsed);
+  await animation;
+  if(sequence!==drawSeq)return;
+  busy=false;stage.classList.remove('drawing');current=next;
+  render();
+  if(err||!next){
+    const message=err||'Aucun titre n’a été trouvé pour ces filtres.';
+    writeStatus(message,true);
+    showDrawError(message);
+  }else{
+    writeStatus('');confetti();
+  }
+}
+
 function accept(){if(!current)return;if(mode==='explore'){if(!saved.some(x=>x.id===current.id)&&!collection.some(x=>x.id===current.id)){saved.push({id:current.id,titre:current.title,type:[current.type],genre:current.genre||[],annee:current.year,resume:current.summary,tmdbId:current.tmdbId});localStorage.setItem('chapeau_saved_v1',JSON.stringify(saved));writeStatus('Titre ajouté localement. Exportez le JSON depuis les paramètres pour conserver vos ajouts dans votre dépôt.')}else writeStatus('Ce titre figure déjà dans votre collection.')}else writeStatus('Bon visionnage !')}
 function exportJson(){const merged=[...new Map([...collection.map(x=>x.raw||x),...saved].map(o=>[String(o.id),o])).values()];const blob=new Blob([JSON.stringify(merged,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='collection-enrichie.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function openSettings(){$('token').value=token;$('savedCount').textContent=`${saved.length} découverte(s) enregistrée(s) localement.`;$('settingsOverlay').classList.add('open')}
