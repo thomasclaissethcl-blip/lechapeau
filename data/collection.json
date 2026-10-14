@@ -1,11 +1,894 @@
 [
   {
-    "id": "grand-budapest-hotel",
+    "id": "almost-famous",
+    "titre": "Almost Famous",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Comédie",
+      "Drame",
+      "Musical"
+    ],
+    "ambiance": [
+      "Nostalgique",
+      "Émouvant",
+      "Léger"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2000,
+    "resume": "Un adolescent suit une tournée de rock et découvre les coulisses du journalisme musical."
+  },
+  {
+    "id": "dirty-dancing",
+    "titre": "Dirty Dancing",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Romance",
+      "Drame",
+      "Musical"
+    ],
+    "ambiance": [
+      "Romantique",
+      "Entraînant",
+      "Nostalgique"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1987,
+    "resume": "Une romance estivale se noue autour de la danse dans une station de vacances."
+  },
+  {
+    "id": "captain-fantastic",
+    "titre": "Captain Fantastic",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Drame",
+      "Comédie"
+    ],
+    "ambiance": [
+      "Émouvant",
+      "Réflexif",
+      "Décalé"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2016,
+    "resume": "Une famille vivant à l’écart de la société doit se confronter au monde extérieur."
+  },
+  {
+    "id": "sound-of-metal",
+    "titre": "Sound of Metal",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Drame",
+      "Musical"
+    ],
+    "ambiance": [
+      "Intense",
+      "Émouvant",
+      "Réflexif"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2019,
+    "resume": "Un batteur doit reconstruire ses repères après une perte soudaine de l’audition."
+  },
+  {
+    "id": "le-seigneur-des-anneaux-trilogie-de-peter-jackson",
+    "titre": "Le Seigneur des anneaux (trilogie de Peter Jackson)",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Fantastique",
+      "Aventure",
+      "Action"
+    ],
+    "ambiance": [
+      "Épique",
+      "Immersif",
+      "Émouvant"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2001,
+    "resume": "Les trois films de Peter Jackson réunis en une seule entrée pour une grande aventure en Terre du Milieu.",
+    "collection": [
+      "Le Seigneur des anneaux"
+    ]
+  },
+  {
+    "id": "rrr",
+    "titre": "RRR",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Action",
+      "Aventure",
+      "Drame",
+      "Musical"
+    ],
+    "ambiance": [
+      "Épique",
+      "Entraînant",
+      "Intense"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2022,
+    "resume": "Deux héros liés par une amitié tumultueuse affrontent la domination coloniale."
+  },
+  {
+    "id": "titanic",
+    "titre": "Titanic",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Romance",
+      "Drame"
+    ],
+    "ambiance": [
+      "Romantique",
+      "Émouvant",
+      "Épique"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 1997,
+    "resume": "Une histoire d’amour à bord du paquebot lors de sa traversée fatale."
+  },
+  {
+    "id": "stop-making-sense",
+    "titre": "Stop Making Sense",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Documentaire",
+      "Musical"
+    ],
+    "ambiance": [
+      "Entraînant",
+      "Léger"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1984,
+    "resume": "Un concert des Talking Heads filmé par Jonathan Demme."
+  },
+  {
+    "id": "the-substance",
+    "titre": "The Substance",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Horreur",
+      "Science-fiction",
+      "Drame"
+    ],
+    "ambiance": [
+      "Dérangeant",
+      "Intense",
+      "Décalé"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2024,
+    "resume": "Une star vieillissante expérimente un traitement radical aux conséquences terrifiantes."
+  },
+  {
+    "id": "le-fabuleux-destin-damelie-poulain",
+    "titre": "Le Fabuleux Destin d’Amélie Poulain",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Comédie",
+      "Romance"
+    ],
+    "ambiance": [
+      "Léger",
+      "Romantique",
+      "Décalé"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2001,
+    "resume": "Une jeune Parisienne décide de transformer discrètement la vie des autres."
+  },
+  {
+    "id": "pauvres-creatures-poor-things",
+    "titre": "Pauvres Créatures (Poor Things)",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Fantastique",
+      "Comédie",
+      "Drame",
+      "Science-fiction"
+    ],
+    "ambiance": [
+      "Décalé",
+      "Réflexif",
+      "Dérangeant"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2023,
+    "resume": "Une jeune femme découvre le monde et son autonomie dans une fable extravagante."
+  },
+  {
+    "id": "monkey-man",
+    "titre": "Monkey Man",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Action",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Intense",
+      "Sombre"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2024,
+    "resume": "Un combattant clandestin entreprend de se venger des puissants."
+  },
+  {
+    "id": "lion",
+    "titre": "Lion",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Drame"
+    ],
+    "ambiance": [
+      "Émouvant",
+      "Intense"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2016,
+    "resume": "Un homme cherche à retrouver sa famille d’origine après une enfance bouleversée."
+  },
+  {
+    "id": "slumdog-millionaire",
+    "titre": "Slumdog Millionaire",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Drame",
+      "Romance"
+    ],
+    "ambiance": [
+      "Entraînant",
+      "Émouvant",
+      "Intense"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2008,
+    "resume": "Un jeune homme de Mumbai participe à un jeu télévisé qui retrace sa vie."
+  },
+  {
+    "id": "civil-war",
+    "titre": "Civil War",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Action",
+      "Drame",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Intense",
+      "Sombre",
+      "Réflexif"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2024,
+    "resume": "Des photojournalistes traversent des États-Unis déchirés par une guerre civile."
+  },
+  {
+    "id": "love-actually",
+    "titre": "Love Actually",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Comédie",
+      "Romance"
+    ],
+    "ambiance": [
+      "Léger",
+      "Romantique",
+      "Réconfortant"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2003,
+    "resume": "Des destins amoureux se croisent à Londres à l’approche de Noël."
+  },
+  {
+    "id": "coup-de-foudre-a-notting-hill",
+    "titre": "Coup de foudre à Notting Hill",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Comédie",
+      "Romance"
+    ],
+    "ambiance": [
+      "Léger",
+      "Romantique",
+      "Réconfortant"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 1999,
+    "resume": "Un libraire londonien rencontre une célèbre actrice."
+  },
+  {
+    "id": "the-grand-budapest-hotel",
     "titre": "The Grand Budapest Hotel",
     "type": [
       "Film"
     ],
     "genre": [
+      "Comédie",
+      "Aventure",
+      "Policier"
+    ],
+    "ambiance": [
+      "Décalé",
+      "Léger",
+      "Nostalgique"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2014,
+    "resume": "Un concierge et son jeune protégé vivent une aventure rocambolesque dans une Europe imaginaire.",
+    "collection": [
+      "Films de Wes Anderson"
+    ]
+  },
+  {
+    "id": "moonrise-kingdom",
+    "titre": "Moonrise Kingdom",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Comédie",
+      "Romance",
+      "Aventure"
+    ],
+    "ambiance": [
+      "Décalé",
+      "Tendre",
+      "Nostalgique"
+    ],
+    "duree": [
+      "Court"
+    ],
+    "annee": 2012,
+    "resume": "Deux adolescents amoureux s’enfuient sur une île de Nouvelle-Angleterre.",
+    "collection": [
+      "Films de Wes Anderson"
+    ]
+  },
+  {
+    "id": "the-darjeeling-limited",
+    "titre": "The Darjeeling Limited",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Comédie",
+      "Drame",
+      "Aventure"
+    ],
+    "ambiance": [
+      "Décalé",
+      "Réflexif",
+      "Nostalgique"
+    ],
+    "duree": [
+      "Court"
+    ],
+    "annee": 2007,
+    "resume": "Trois frères voyagent en train à travers l’Inde pour renouer leurs liens.",
+    "collection": [
+      "Films de Wes Anderson"
+    ]
+  },
+  {
+    "id": "the-phoenician-scheme",
+    "titre": "The Phoenician Scheme",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Comédie",
+      "Drame",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Décalé",
+      "Mystérieux"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2025,
+    "resume": "Un industriel organise sa succession au milieu d’intrigues financières et familiales.",
+    "collection": [
+      "Films de Wes Anderson"
+    ]
+  },
+  {
+    "id": "human-traffic",
+    "titre": "Human Traffic",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Comédie",
+      "Drame",
+      "Musical"
+    ],
+    "ambiance": [
+      "Entraînant",
+      "Décalé",
+      "Nostalgique"
+    ],
+    "duree": [
+      "Court"
+    ],
+    "annee": 1999,
+    "resume": "Une bande de jeunes Britanniques vit un week-end de fête et de musique électronique."
+  },
+  {
+    "id": "stranger-things-saison-5",
+    "titre": "Stranger Things (saison 5)",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Fantastique",
+      "Horreur",
+      "Aventure"
+    ],
+    "ambiance": [
+      "Mystérieux",
+      "Intense",
+      "Nostalgique"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2025,
+    "resume": "La dernière saison de la série suit les héros de Hawkins face à une menace surnaturelle."
+  },
+  {
+    "id": "doctor-who",
+    "titre": "Doctor Who",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Aventure",
+      "Fantastique"
+    ],
+    "ambiance": [
+      "Aventureux",
+      "Décalé",
+      "Émouvant"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1963,
+    "resume": "Un voyageur du temps explore l’univers avec ses compagnons au fil des incarnations."
+  },
+  {
+    "id": "the-leftovers",
+    "titre": "The Leftovers",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Drame",
+      "Fantastique",
+      "Mystère"
+    ],
+    "ambiance": [
+      "Émouvant",
+      "Sombre",
+      "Réflexif"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2014,
+    "resume": "Après une disparition inexplicable, des proches tentent de donner du sens à l’absence."
+  },
+  {
+    "id": "twin-peaks",
+    "titre": "Twin Peaks",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Policier",
+      "Mystère",
+      "Drame",
+      "Fantastique"
+    ],
+    "ambiance": [
+      "Mystérieux",
+      "Décalé",
+      "Sombre"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 1990,
+    "resume": "Une enquête dans une petite ville révèle des secrets inquiétants et surréalistes."
+  },
+  {
+    "id": "yellowjackets",
+    "titre": "Yellowjackets",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Drame",
+      "Thriller",
+      "Horreur",
+      "Mystère"
+    ],
+    "ambiance": [
+      "Sombre",
+      "Intense",
+      "Mystérieux"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2021,
+    "resume": "Les survivantes d’un crash aérien sont hantées par leur passé."
+  },
+  {
+    "id": "flight-of-the-conchords",
+    "titre": "Flight of the Conchords",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Comédie",
+      "Musical"
+    ],
+    "ambiance": [
+      "Léger",
+      "Décalé",
+      "Réconfortant"
+    ],
+    "duree": [
+      "Court"
+    ],
+    "annee": 2007,
+    "resume": "Deux musiciens néo-zélandais tentent leur chance à New York."
+  },
+  {
+    "id": "the-last-of-us",
+    "titre": "The Last of Us",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Drame",
+      "Horreur",
+      "Science-fiction",
+      "Aventure"
+    ],
+    "ambiance": [
+      "Sombre",
+      "Intense",
+      "Émouvant"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2023,
+    "resume": "Deux survivants traversent un monde ravagé par une pandémie fongique."
+  },
+  {
+    "id": "the-it-crowd",
+    "titre": "The IT Crowd",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Comédie"
+    ],
+    "ambiance": [
+      "Léger",
+      "Décalé",
+      "Réconfortant"
+    ],
+    "duree": [
+      "Court"
+    ],
+    "annee": 2006,
+    "resume": "Les employés du service informatique d’une entreprise enchaînent les situations absurdes."
+  },
+  {
+    "id": "alien",
+    "titre": "Alien",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Horreur",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Sombre",
+      "Intense",
+      "Mystérieux"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1979,
+    "resume": "L’équipage d’un cargo spatial affronte une créature inconnue.",
+    "collection": [
+      "Univers Alien"
+    ]
+  },
+  {
+    "id": "aliens-le-retour",
+    "titre": "Aliens, le retour",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Action",
+      "Horreur"
+    ],
+    "ambiance": [
+      "Intense",
+      "Épique",
+      "Sombre"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 1986,
+    "resume": "Ripley accompagne une mission militaire vers une colonie menacée.",
+    "collection": [
+      "Univers Alien"
+    ]
+  },
+  {
+    "id": "alien-3",
+    "titre": "Alien 3",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Horreur",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Sombre",
+      "Intense"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1992,
+    "resume": "Ripley se retrouve sur une planète-prison où une créature rôde.",
+    "collection": [
+      "Univers Alien"
+    ]
+  },
+  {
+    "id": "alien-la-resurrection",
+    "titre": "Alien, la résurrection",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Horreur",
+      "Action"
+    ],
+    "ambiance": [
+      "Sombre",
+      "Décalé",
+      "Intense"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1997,
+    "resume": "Un clonage de Ripley ranime une dangereuse expérimentation.",
+    "collection": [
+      "Univers Alien"
+    ]
+  },
+  {
+    "id": "alien-romulus",
+    "titre": "Alien: Romulus",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Horreur",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Intense",
+      "Sombre",
+      "Mystérieux"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2024,
+    "resume": "De jeunes colons explorent une station spatiale abandonnée.",
+    "collection": [
+      "Univers Alien"
+    ]
+  },
+  {
+    "id": "alien-earth",
+    "titre": "Alien: Earth",
+    "type": [
+      "Série"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Horreur",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Sombre",
+      "Mystérieux",
+      "Intense"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2025,
+    "resume": "Une menace extraterrestre se manifeste sur Terre dans l’univers Alien.",
+    "collection": [
+      "Univers Alien"
+    ]
+  },
+  {
+    "id": "predator",
+    "titre": "Predator",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Action",
+      "Horreur"
+    ],
+    "ambiance": [
+      "Intense",
+      "Sombre"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1987,
+    "resume": "Une unité d’élite est traquée par un chasseur extraterrestre dans la jungle.",
+    "collection": [
+      "Univers Predator"
+    ]
+  },
+  {
+    "id": "prey",
+    "titre": "Prey",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Action",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Intense",
+      "Aventureux"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2022,
+    "resume": "Une jeune guerrière comanche affronte un prédateur venu d’ailleurs.",
+    "collection": [
+      "Univers Predator"
+    ]
+  },
+  {
+    "id": "terminator-2-le-jugement-dernier",
+    "titre": "Terminator 2 : Le Jugement dernier",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Action",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Épique",
+      "Intense",
+      "Émouvant"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 1991,
+    "resume": "Un cyborg protège un adolescent dont dépend le futur de l’humanité."
+  },
+  {
+    "id": "paul",
+    "titre": "Paul",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
       "Comédie",
       "Aventure"
     ],
@@ -14,88 +897,457 @@
       "Décalé"
     ],
     "duree": [
-      "Court"
+      "Moyen"
     ],
-    "annee": 2014,
-    "resume": "Une aventure fantasque dans un hôtel européen légendaire."
+    "annee": 2011,
+    "resume": "Deux passionnés de science-fiction rencontrent un extraterrestre en cavale."
   },
   {
-    "id": "dark",
-    "titre": "Dark",
+    "id": "silo-saison-3",
+    "titre": "Silo (saison 3)",
     "type": [
       "Série"
     ],
     "genre": [
       "Science-fiction",
+      "Drame",
+      "Mystère",
       "Thriller"
     ],
     "ambiance": [
       "Sombre",
-      "Mystérieux"
+      "Mystérieux",
+      "Réflexif"
     ],
     "duree": [
       "Long"
     ],
-    "annee": 2017,
-    "resume": "Une disparition révèle les secrets de plusieurs générations."
+    "annee": 2026,
+    "resume": "La troisième saison approfondit les secrets du monde souterrain de Silo."
   },
   {
-    "id": "interstellar",
-    "titre": "Interstellar",
+    "id": "abyss",
+    "titre": "Abyss",
     "type": [
       "Film"
     ],
     "genre": [
       "Science-fiction",
-      "Aventure"
+      "Aventure",
+      "Thriller"
     ],
     "ambiance": [
-      "Épique",
+      "Mystérieux",
+      "Intense",
       "Émouvant"
     ],
     "duree": [
       "Long"
     ],
-    "annee": 2014,
-    "resume": "Un voyage spatial à la recherche d’un avenir pour l’humanité."
+    "annee": 1989,
+    "resume": "Une équipe sous-marine fait une découverte extraordinaire dans les profondeurs."
   },
   {
-    "id": "brooklyn-nine-nine",
-    "titre": "Brooklyn Nine-Nine",
-    "type": [
-      "Série"
-    ],
-    "genre": [
-      "Comédie",
-      "Policier"
-    ],
-    "ambiance": [
-      "Léger"
-    ],
-    "duree": [
-      "Court"
-    ],
-    "annee": 2013,
-    "resume": "Le quotidien décalé d’une brigade de police new-yorkaise."
-  },
-  {
-    "id": "knives-out",
-    "titre": "Knives Out",
+    "id": "bienvenue-a-gattaca",
+    "titre": "Bienvenue à Gattaca",
     "type": [
       "Film"
     ],
     "genre": [
-      "Comédie",
+      "Science-fiction",
+      "Drame",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Réflexif",
+      "Émouvant",
+      "Sombre"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1997,
+    "resume": "Un homme défie un système social fondé sur la sélection génétique."
+  },
+  {
+    "id": "larmee-des-douze-singes",
+    "titre": "L’Armée des douze singes",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Thriller",
+      "Mystère"
+    ],
+    "ambiance": [
+      "Sombre",
+      "Mystérieux",
+      "Réflexif"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 1995,
+    "resume": "Un détenu voyage dans le temps pour enquêter sur l’origine d’une pandémie."
+  },
+  {
+    "id": "mad-max-fury-road",
+    "titre": "Mad Max: Fury Road",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Action",
+      "Science-fiction",
+      "Aventure"
+    ],
+    "ambiance": [
+      "Épique",
+      "Intense",
+      "Entraînant"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2015,
+    "resume": "Une fuite effrénée traverse un désert post-apocalyptique.",
+    "collection": [
+      "Saga Mad Max"
+    ]
+  },
+  {
+    "id": "furiosa-une-saga-mad-max",
+    "titre": "Furiosa : Une saga Mad Max",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Action",
+      "Science-fiction",
+      "Aventure"
+    ],
+    "ambiance": [
+      "Épique",
+      "Intense",
+      "Sombre"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2024,
+    "resume": "L’histoire de Furiosa avant les événements de Fury Road.",
+    "collection": [
+      "Saga Mad Max"
+    ]
+  },
+  {
+    "id": "invasion-los-angeles",
+    "titre": "Invasion Los Angeles",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Action",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Décalé",
+      "Réflexif",
+      "Sombre"
+    ],
+    "duree": [
+      "Court"
+    ],
+    "annee": 1988,
+    "resume": "Un homme découvre que le monde est manipulé par des extraterrestres."
+  },
+  {
+    "id": "contact",
+    "titre": "Contact",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Drame",
+      "Mystère"
+    ],
+    "ambiance": [
+      "Réflexif",
+      "Émouvant",
+      "Mystérieux"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 1997,
+    "resume": "Une astronome reçoit un signal qui pourrait venir d’une civilisation extraterrestre."
+  },
+  {
+    "id": "le-chateau-dans-le-ciel",
+    "titre": "Le Château dans le ciel",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Animation",
+      "Fantastique",
+      "Aventure"
+    ],
+    "ambiance": [
+      "Épique",
+      "Émouvant",
+      "Réconfortant"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1986,
+    "resume": "Deux enfants cherchent une cité légendaire flottant dans les nuages."
+  },
+  {
+    "id": "sunshine",
+    "titre": "Sunshine",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Thriller",
+      "Drame"
+    ],
+    "ambiance": [
+      "Intense",
+      "Sombre",
+      "Réflexif"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2007,
+    "resume": "Une mission spatiale tente de raviver le Soleil mourant."
+  },
+  {
+    "id": "robocop",
+    "titre": "RoboCop",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Action",
       "Policier"
     ],
     "ambiance": [
-      "Mystérieux",
+      "Sombre",
+      "Décalé",
+      "Intense"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1987,
+    "resume": "Un policier reconstruit en cyborg lutte contre le crime et les intérêts industriels."
+  },
+  {
+    "id": "the-truman-show",
+    "titre": "The Truman Show",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Comédie",
+      "Drame"
+    ],
+    "ambiance": [
+      "Réflexif",
+      "Émouvant",
       "Décalé"
     ],
     "duree": [
       "Moyen"
     ],
-    "annee": 2019,
-    "resume": "Une enquête pleine de rebondissements dans une famille extravagante."
+    "annee": 1998,
+    "resume": "Un homme soupçonne que son existence entière est mise en scène."
+  },
+  {
+    "id": "wall-e",
+    "titre": "WALL-E",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Animation",
+      "Science-fiction",
+      "Aventure",
+      "Romance"
+    ],
+    "ambiance": [
+      "Tendre",
+      "Émouvant",
+      "Réconfortant"
+    ],
+    "duree": [
+      "Court"
+    ],
+    "annee": 2008,
+    "resume": "Un petit robot solitaire découvre l’amour sur une Terre abandonnée."
+  },
+  {
+    "id": "total-recall",
+    "titre": "Total Recall",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Action",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Intense",
+      "Décalé",
+      "Mystérieux"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1990,
+    "resume": "Un homme découvre que ses souvenirs pourraient dissimuler une autre identité."
+  },
+  {
+    "id": "cloud-atlas",
+    "titre": "Cloud Atlas",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Drame",
+      "Aventure"
+    ],
+    "ambiance": [
+      "Épique",
+      "Réflexif",
+      "Émouvant"
+    ],
+    "duree": [
+      "Long"
+    ],
+    "annee": 2012,
+    "resume": "Six récits à différentes époques dessinent des liens entre les destinées humaines."
+  },
+  {
+    "id": "premier-contact-arrival",
+    "titre": "Premier Contact (Arrival)",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Drame",
+      "Mystère"
+    ],
+    "ambiance": [
+      "Réflexif",
+      "Émouvant",
+      "Mystérieux"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2016,
+    "resume": "Une linguiste tente de communiquer avec des visiteurs extraterrestres."
+  },
+  {
+    "id": "chappie",
+    "titre": "Chappie",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Action",
+      "Drame"
+    ],
+    "ambiance": [
+      "Émouvant",
+      "Décalé",
+      "Réflexif"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2015,
+    "resume": "Un robot policier doté d’une intelligence nouvelle apprend à devenir lui-même."
+  },
+  {
+    "id": "district-9",
+    "titre": "District 9",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Action",
+      "Drame"
+    ],
+    "ambiance": [
+      "Intense",
+      "Sombre",
+      "Réflexif"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2009,
+    "resume": "Des extraterrestres marginalisés vivent dans un quartier ségrégué près de Johannesburg."
+  },
+  {
+    "id": "her",
+    "titre": "Her",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Romance",
+      "Drame"
+    ],
+    "ambiance": [
+      "Romantique",
+      "Émouvant",
+      "Réflexif"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 2013,
+    "resume": "Un homme noue une relation intime avec une intelligence artificielle."
+  },
+  {
+    "id": "the-thing",
+    "titre": "The Thing",
+    "type": [
+      "Film"
+    ],
+    "genre": [
+      "Science-fiction",
+      "Horreur",
+      "Thriller"
+    ],
+    "ambiance": [
+      "Sombre",
+      "Intense",
+      "Mystérieux"
+    ],
+    "duree": [
+      "Moyen"
+    ],
+    "annee": 1982,
+    "resume": "Une équipe isolée en Antarctique affronte une créature capable d’imiter les humains."
   }
 ]
