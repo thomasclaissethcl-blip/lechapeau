@@ -98,6 +98,26 @@ async function fetchKind(kind,token,filters,excludeIds,limit){
   return shuffle(unique).slice(0,limit);
 }
 
+// Recherche explicite par titre : distincte de Discover et de ses filtres aléatoires.
+export async function searchTitles(token,query){
+  const q=String(query||'').trim();
+  if(q.length<2)throw new Error('Saisissez au moins deux caractères pour rechercher un titre.');
+  if(!token)throw new Error('Configurez votre jeton TMDB dans les paramètres.');
+  const kinds=['movie','tv'];
+  const responses=await Promise.allSettled(kinds.map(kind=>get(`/search/${kind}`,token,{query:q,language:'fr-FR',include_adult:false,page:1})));
+  if(responses.every(r=>r.status==='rejected'))throw responses[0].reason;
+  const forbidden=new Set([16,99,10763,10764,10766,10767]);
+  const items=responses.flatMap((r,index)=>r.status==='fulfilled'?(r.value.results||[]).filter(item=>index===0||!(item.genre_ids||[]).some(g=>forbidden.has(g))).map(item=>({
+    id:`tmdb-${kinds[index]}-${item.id}`,tmdbId:item.id,title:item.title||item.name||'',
+    type:index===0?'Film':'Série',genre:(item.genre_ids||[]).map(id=>Object.keys(GENRES[index===0?'Film':'Série']).find(k=>GENRES[index===0?'Film':'Série'][k]===id)).filter(Boolean),
+    year:Number((item.release_date||item.first_air_date||'').slice(0,4))||null,
+    summary:item.overview||'Aucun résumé disponible.',
+    poster:item.poster_path?`https://image.tmdb.org/t/p/w342${item.poster_path}`:null,
+    url:`https://www.themoviedb.org/${kinds[index]}/${item.id}`
+  })):[]);
+  return items.filter(x=>x.title).sort((a,b)=>(b.year||0)-(a.year||0));
+}
+
 export async function explore(token,filters,excludeIds=new Set()){
   if(!token)throw new Error('Ajoutez un jeton TMDB dans les paramètres pour explorer.');
   const kinds=(filters.type?.length?filters.type:['Film','Série']).filter(kind=>kind==='Film'||kind==='Série');
