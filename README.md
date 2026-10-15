@@ -85,3 +85,16 @@ Dans **Paramètres > Exploration TMDB**, la case **Mémoriser mon jeton sur cet 
 Le filtre « Pays d’origine » accepte un pays à la fois. « Monde » (sélectionné par défaut) ne restreint pas la provenance. Il utilise `with_origin_country` sur les recherches TMDB, et ne doit pas être confondu avec la langue originale ni le pays où un film est disponible. Les coproductions peuvent apparaître pour plusieurs pays.
 
 Les films d’animation restent autorisés, y compris les productions japonaises et les films Ghibli. Les **séries d’animation** sont exclues du tirage d’exploration, quelle que soit leur provenance. Les séries sont limitées aux catégories TMDB « mini-série » et « scripted » (`with_type=2|4`), avec exclusion supplémentaire des genres animation, documentaire, news, reality, soap et talk-show. Le filtrage dépend de la qualité du référencement TMDB : des contenus mal catégorisés peuvent subsister, et certaines fictions atypiques peuvent être exclues. Le mode « Dans le chapeau » ne subit aucune de ces exclusions.
+
+### Sélection des pays dans Exploration
+
+Plusieurs pays peuvent être sélectionnés simultanément : ils sont combinés avec une logique OU. Le choix « Monde » efface la sélection géographique et inclut tous les pays. Cliquer à nouveau sur un pays sélectionné le retire.
+
+
+## Recherche et collection persistante
+
+Dans « Hors du chapeau », la recherche par titre interroge les endpoints TMDB de recherche de films et séries. Elle est indépendante des filtres du tirage. Cliquez sur « Ajouter à mon chapeau » pour conserver un résultat dans la collection locale. Les résultats déjà présents ne sont pas ajoutés en double.
+
+La liste livrée dans `data/collection.json` reste la base initiale, en lecture seule. Les ajouts et imports sont sauvegardés dans le `localStorage` du navigateur (clé `chapeau_saved_v1`) et fusionnés avec la liste initiale à l’affichage. Fermer puis rouvrir le navigateur ne les efface normalement pas. En revanche, nettoyage des données du site, navigation privée, changement d'appareil, quota ou politique du navigateur peuvent effacer ou bloquer ce stockage. **Exportez régulièrement votre collection JSON** et conservez une copie hors du navigateur. Vous pouvez remplacer `data/collection.json` par cette exportation pour assurer la persistance sur votre dépôt.
+
+Dans Paramètres > Ma collection : « Exporter » télécharge l'ensemble des titres (base + ajouts), « Importer » fusionne un tableau JSON de titres à la collection existante en ignorant les doublons d'identifiant. L'import ne supprime aucun titre. « Effacer les ajouts locaux » n'efface pas les titres du JSON initial.
