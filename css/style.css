@@ -43,3 +43,8 @@ body.motion-off .stage.drawing .hatBtn,body.motion-off .stage.drawing .paper,bod
 .refresh-wrap{text-align:center;margin:7px 0 2px}.refresh-wrap .secondary{min-height:42px;padding:9px 16px;width:auto;max-width:100%}
 
 .remember-token{display:flex;align-items:center;gap:.6rem;color:#f6e7cb;font-size:.92rem;line-height:1.45;cursor:pointer}.remember-token input{width:1.15rem;height:1.15rem;accent-color:#e8c583;flex:none}
+
+/* Recherche TMDB et import de collections */
+.search-area{margin:1rem auto;max-width:680px;padding:1.1rem;border:1px solid #505b7b;border-radius:18px;background:#252d47;color:#f7ebd3}
+.search-area[hidden]{display:none!important}.search-area h2{font-size:1.18rem;margin:0 0 .4rem}.search-form{display:flex;gap:.55rem;flex-wrap:wrap}.search-form input{min-width:175px;flex:1;padding:.85rem;border:1px solid #9ca9c8;border-radius:10px;font:inherit;background:#121a30;color:#fff}.search-form button{margin:0}.search-results{display:grid;gap:.7rem;max-height:65vh;overflow-y:auto}.search-card{display:flex;gap:.8rem;padding:.85rem;border:1px solid #4b5577;border-radius:12px;background:#1b233b}.search-card img{width:74px;align-self:flex-start;aspect-ratio:2/3;object-fit:cover;border-radius:5px}.search-card .info{flex:1;min-width:0}.search-card h3{font-size:1.02rem;margin:0 0 .25rem;color:#fff}.search-card p{font-size:.85rem;margin:.3rem 0;color:#cad2e4}.search-card button{margin-top:.4rem;min-height:40px}.search-card button:disabled{opacity:.75;cursor:default}.import-label{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;text-align:center}.import-label:focus-visible{outline:2px solid #f1ce8b}
+@media(max-width:420px){.search-form{flex-direction:column}.search-form button{width:100%}.search-card img{width:58px}}
